@@ -1,7 +1,8 @@
 import React from "react";
 import "./ProductCard.css";
 
-interface ProductCardProps {
+export interface ProductCardProps {
+  id: number;
   image: string;
   name: string;
   description: string;
