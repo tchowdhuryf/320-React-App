@@ -1,5 +1,5 @@
 .product-card {
-  border: 2px solid rgb(99, 99, 231);
+  border: 2px solid #2e2d2d;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
