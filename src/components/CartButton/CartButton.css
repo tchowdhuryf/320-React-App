@@ -1,0 +1,13 @@
+.cart__button {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  border: none;
+  background-color: #E567EB;
+  color: black;
+  cursor: pointer;
+}
+
+.cart__button:hover {
+  background-color: #C455D9;
+}
