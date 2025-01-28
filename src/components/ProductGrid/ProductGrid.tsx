@@ -6,14 +6,13 @@ interface ProductGridProps {
   products: ProductCardProps[];
   rows: number;
   columns: number;
-  onAddToCart: (productName: string) => void;
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({
   products,
   rows,
   columns,
-  onAddToCart,
+
 }) => {
   const maxProducts = rows * columns;
 
@@ -35,9 +34,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
           key={product.id}
           image={product.image}
           name={product.name}
-          description={product.description}
           price={product.price}
-          onAddToCart={() => onAddToCart(product.name)}
         />
       ))}
     </div>
