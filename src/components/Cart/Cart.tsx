@@ -13,9 +13,17 @@ export interface CartProps {
   }[];
   isOpen: boolean;
   toggleCart: () => void;
+  removeFromCart: (id: number) => void;
+  updateQuantity: (id: number, change: number) => void;
 }
 
-const Cart: React.FC<CartProps> = ({ items, isOpen, toggleCart }) => {
+const Cart: React.FC<CartProps> = ({
+  items,
+  isOpen,
+  toggleCart,
+  removeFromCart,
+  updateQuantity,
+}) => {
   return (
     <div className={`cart ${isOpen ? "cart--open" : "cart--closed"}`}>
       <button className="cart__close" onClick={toggleCart}>
@@ -24,7 +32,12 @@ const Cart: React.FC<CartProps> = ({ items, isOpen, toggleCart }) => {
       <h2 className="cart__title">Cart</h2>
       <div className="cart__items">
         {items.map((item) => (
-          <CartItem key={item.id} item={item} />
+          <CartItem
+            key={item.id}
+            item={item}
+            removeFromCart={removeFromCart}
+            updateQuantity={updateQuantity}
+          />
         ))}
       </div>
       <div className="cart__total">
