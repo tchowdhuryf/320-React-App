@@ -6,12 +6,14 @@ export interface ProductCardProps {
   image: string;
   name: string;
   price: number;
+  onAddToCart?: () => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
   image,
   name,
   price,
+  onAddToCart,
 }) => {
   return (
     <div className="product-card">
@@ -20,7 +22,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <h3 className="product-name">{name}</h3>
         <p className="product-price">${price.toFixed(2)}</p>
       </div>
-      <button className="add-to-cart-btn">Add to Cart</button>
+      <button className="add-to-cart-btn" onClick={onAddToCart}>
+        Add to Cart
+      </button>
     </div>
   );
 };
