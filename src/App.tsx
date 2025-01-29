@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [products, setProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]); 
   const [cartItems, setCartItems] = useState<any[]>([]);
 
   const toggleCart = () => {
@@ -42,6 +43,7 @@ function App() {
           quantity: 1,
         }));
         setProducts(mappedProducts);
+        setFilteredProducts(mappedProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -59,7 +61,6 @@ function App() {
             : item
         );
       }
-
       return [...prevCart, { ...product, quantity: 1 }];
     });
   };
@@ -78,12 +79,23 @@ function App() {
     );
   };
 
+  const handleSearch = (query: string) => {
+    if (!query.trim()) {
+      setFilteredProducts(products);
+    } else {
+      const searchResults = products.filter((product) =>
+        product.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredProducts(searchResults);
+    }
+  };
+
   return (
     <div>
       <NavBar
         logo={<Logo src="./src/assets/WillowsOasis.png" alt="logo" />}
         cartButton={<CartButton onClick={toggleCart} />}
-        searchBar={<SearchBar onSearch={(query) => console.log(query)} />}
+        searchBar={<SearchBar onSearch={handleSearch} />}
         navMenu={
           <NavMenu>
             <NavMenuItem href="#home" label="Home" />
@@ -100,7 +112,7 @@ function App() {
         updateQuantity={updateQuantity}
       />
       <ProductGrid
-        products={products}
+        products={filteredProducts} 
         rows={16}
         columns={4}
         addToCart={addToCart}
