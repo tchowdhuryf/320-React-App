@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [products, setProducts] = useState<any[]>([]);
+  const [cartItems, setCartItems] = useState<any[]>([]);
 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
@@ -25,15 +26,14 @@ function App() {
           {
             method: "GET",
             headers: {
-              "X-RapidAPI-Key": "89d9a2f0famshc686eebc811b505p178e5ajsn6e27b8864df1",
+              "X-RapidAPI-Key":
+                "2f0c8c114dmsh885c7a2d34dbb8bp1cb53fjsn5d29879e6bb4",
               "X-RapidAPI-Host": "the-birthday-cake-db.p.rapidapi.com",
             },
           }
         );
 
         const data = await response.json();
-        console.log(data); //ABT: data is an array of objects
-
         const mappedProducts = data.map((item: any) => ({
           id: item.id,
           image: item.image || "https://placehold.co/300",
@@ -49,6 +49,35 @@ function App() {
     fetchProducts();
   }, []);
 
+  const addToCart = (product: any) => {
+    setCartItems((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
+  };
+
+  const removeFromCart = (id: number) => {
+    setCartItems((prevCart) => prevCart.filter((item) => item.id !== id));
+  };
+
+  const updateQuantity = (id: number, change: number) => {
+    setCartItems((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + change) }
+          : item
+      )
+    );
+  };
+
   return (
     <div>
       <NavBar
@@ -63,8 +92,19 @@ function App() {
           </NavMenu>
         }
       />
-      <Cart items={products} isOpen={isCartOpen} toggleCart={toggleCart} />
-      <ProductGrid products={products} rows={16} columns={4} />
+      <Cart
+        items={cartItems}
+        isOpen={isCartOpen}
+        toggleCart={toggleCart}
+        removeFromCart={removeFromCart}
+        updateQuantity={updateQuantity}
+      />
+      <ProductGrid
+        products={products}
+        rows={16}
+        columns={4}
+        addToCart={addToCart}
+      />
     </div>
   );
 }
