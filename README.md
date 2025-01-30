@@ -1,50 +1,69 @@
-# React + TypeScript + Vite
+<p align="center">
+  <img src="src/assets/WillowsOasis.png" alt="Project Logo" width="200" style="border-radius: 50%;">
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Willow's Oasis
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a React application built using TypeScript and Vite. It features a bakery catalog where users can browse, search for cakes, and manage a shopping cart. The project integrates an external API to fetch product data dynamically.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React** (with TypeScript) - for building the user interface
+- **Vite** - for fast development and build optimization
+- **CSS** - for styling components
+- **AJAX (fetch API)** - for retrieving external data
+- **RapidAPI (the-birthday-cake-db API)** - used to fetch product information
+- **Git & GitHub** - for version control
 
-- Configure the top-level `parserOptions` property like this:
+## Approach Taken
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+The project follows a component-based architecture with reusable UI components such as `ProductCard`, `Cart`, `NavBar`, etc.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+State management is handled using React's `useState` and `useContext` hooks. Data fetching occurs inside the `useAppState.tsx` file, where an API call retrieves product details, which are then mapped and displayed in the UI.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Usage Instructions
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/your-repository.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd your-repository
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Run the development server:
+   ```sh
+   npm run dev
+   ```
+5. Open the application in your browser at `http://localhost:5173/`
+
+## External API Usage
+
+The project fetches product data from:
+   ```js
+   fetch("https://the-birthday-cake-db.p.rapidapi.com", {
+     method: "GET",
+     headers: {
+       "X-RapidAPI-Key": "YOUR_API_KEY",
+       "X-RapidAPI-Host": "the-birthday-cake-db.p.rapidapi.com",
+     },
+   })
+   ```
+
+## Unsolved Problems
+
+- No user authentication is implemented yet.
+- Error handling can be improved to gracefully handle API failures.
+
+## Future Enhancements
+
+- Add page routing
+- Filter product search
+- Add user authentication
+- Improve the UI with animations and better styling
