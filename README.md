@@ -10,6 +10,7 @@ This project is a React application built using TypeScript and Vite. It features
 
 ## Technologies Used
 
+- **Heroicons** - for icons and UI enhancements
 - **React** (with TypeScript) - for building the user interface
 - **Vite** - for fast development and build optimization
 - **CSS** - for styling components
