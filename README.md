@@ -28,11 +28,11 @@ State management is handled using React's `useState` and `useContext` hooks. Dat
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/your-repository.git
+   git clone https://github.com/tchowdhuryf/320-React-App.git
    ```
 2. Navigate to the project directory:
    ```sh
-   cd your-repository
+   cd 320-React-App
    ```
 3. Install dependencies:
    ```sh
